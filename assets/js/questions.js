@@ -1,6 +1,6 @@
 var questions = [
     {
-        heading: "qi",
+        heading: "What is it?",
         answers: ["a", "b", "c", "d"],
         answer: "a",
     },

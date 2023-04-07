@@ -11,8 +11,11 @@ let timerId;
 let currentQindex = 0;
 
 // varaibles to ref dom els (questions div, startBtn, answers div and so on)
+let timer = document.querySelector('#clock')
 let questionsElement = document.querySelector('#questions')
 let startButtonElement = document.querySelector("#start-btn")
+let questionHeaderElement = document.querySelector("#question-header")
+
 // start the game
 
 
@@ -31,23 +34,32 @@ startButtonElement.addEventListener("click", function displayElement () {
 });
 
 
+function timerFunc() {
+    if (time === 0 || currentQindex >= questionBank.length) {
+        clearInterval(timeInterval);
+        endGame();
+        let timeInterval = setInterval(function() {
+            time--;
+            timer.textContent = time;
+      })  
+    }
+}
 
     // start a timer
-setTimeout(function(){
-    console.log("countdown begins");
-    if (time > 0) {
-        document.querySelector('#clock').textContent = time;
-        time--
-        console.log(time);
-    }else{ 
-        console.log("call endGame()");
-        // endGame()
-    }
-});
+// setTimeout(function(){
+//     console.log("countdown begins");
+//     if (time > 0) {
+//         document.querySelector('#clock').textContent = time;
+//         time--
+//         console.log(time);
+//     }else{ 
+//         console.log("call endGame()");
+//         // endGame()
+//     }
+// });
 
-    
+
 // ask a question
-    // get current question from arrray
     // update title element with question title
     // var titleEl = document.querySelector('#q-title')
     // titleEl.textContent = //
@@ -56,6 +68,9 @@ setTimeout(function(){
         // create a new button for every question
         // append choice text to button
         // append choice button to div-id=answers
+
+// get current question from arrray
+questionHeaderElement.textContent = questions
 
 // user clicked on answer
     // target their click, using javascript event 
