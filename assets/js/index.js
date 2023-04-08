@@ -1,6 +1,6 @@
 
 // variables to keep track of data we care about across the entire quiz (otheriwse known as state)
-
+// let highScore = 
 // what is the time remaing
 let time = questions.length * 10;; 
 // let timerId;
@@ -59,9 +59,9 @@ function newQuestion() {
 // loop over question choices 
 // get current question from array and put it in header
 for (let i = 0; i < questions.length; i++) {
-    document.getElementById("#question-header").textContent = questions.heading
-    // questionHeaderElement.textContent = questions.heading
-    // let question = questions[i];
+    document.getElementById("question-header").textContent = questions.heading
+    
+    
     console.log(questions);
     
 }
