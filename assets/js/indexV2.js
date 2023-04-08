@@ -22,24 +22,6 @@ let questionChoicesEl = document.querySelector(".btn-group")
 // let questionHeaderElement = document.querySelector("#question-header")
 
 
-
-
-// start game
-// function startGame(){
-//     startButtonElement.addEventListener("click", function displayElement () {
-//     console.log("clicked");
-//     // initialise timer
-//     // call new question function
-//     timerFunc();
-//     newQuestion();
-//     // bring the questions to the front by changing its hidden state to display
-//     document.querySelector('.hide').style.display = "block";
-//     button.classList.add('show-main-page')
-//     // check that we dsiplay the array correctly
-//     console.log(questions);
-//     // hide main starting page
-//     document.querySelector('.initial-hide').style.display = "none";
-// });
 function startGame(){
 //    show the start page the once usr clicks start button, swap the pages out
     document.getElementById("start-game").className = ("show")
@@ -50,7 +32,7 @@ function startGame(){
         document.getElementById("clock").className = ("show")
     
     // call new question function
-    newQuestion();
+    renderQuestion();
     // bring the questions to the front by changing its hidden state to display
     
    
@@ -77,7 +59,7 @@ function timerFunc() {
     }, 1000);
 }
 
-function newQuestion() {
+function renderQuestion() {
     for (let i = 0; i < questions.length; i++) {
         const choice = questions[i];
         // dynamically inject <li> and <button> into html
@@ -89,7 +71,7 @@ function newQuestion() {
         // ask 1st questions
         document.getElementById("question-header").textContent = questions[i].heading;
     
-        button.textContent = questions[i].quizQuestions[1]       
+        button.textContent = questions[i].quizQuestions[i]       
         // When an answer button is clicked
         button.addEventListener('click', function(){
             // if the answer is correct, give 10 score & feedback
@@ -122,25 +104,6 @@ function newQuestion() {
 }
 }
 
-
-
-    
-
-
-
-// create a new button for every question
-// append choice text to button
-// append choice button to div-id=answers
-// clear out old quesiton choices reset inner html)
-
-    
-
-
-// user clicked on answer
-    // target their click, using javascript event 
-    // if they were wrong, take time away and siplay wrong feedback
-    // else, display right
-    // if we have ran out of time or questiojns, run EndGame func, else, run ask a question again
 
 // end Game 
 function loserMessage() {
