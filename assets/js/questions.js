@@ -1,22 +1,22 @@
 var questions = [
     {
         heading: "What is it?",
-        answers: ["a", "b", "c", "d"],
+        quizQuestions: ["a", "b", "c", "d"],
         answer: "a",
     },
     {
-        heading: "qi",
-        answers: ["a", "b", "c", "d"],
+        heading: "q2",
+        quizQuestions: ["q", "w", "e", "r"],
+        answer: "w",
+    },
+    {
+        heading: "q3",
+        quizQuestions: ["a", "s", "d", "f"],
         answer: "a",
     },
     {
-        heading: "qi",
-        answers: ["a", "b", "c", "d"],
-        answer: "a",
-    },
-    {
-        heading: "qi",
-        answers: ["a", "b", "c", "d"],
-        answer: "a",
+        heading: "q4",
+        quizQuestions: ["z", "x", "c", "v"],
+        answer: "v",
     },
 ]

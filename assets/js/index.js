@@ -13,6 +13,7 @@ let currentQindex = 0;
 let timer = document.querySelector('#clock')
 let questionsElement = document.querySelector('#questions')
 let startButtonElement = document.querySelector("#start-btn")
+let userChoice = document.querySelector("#question-1")
 // let questionHeaderElement = document.querySelector("#question-header")
 
 
@@ -55,21 +56,34 @@ function timerFunc() {
     
 // ask a question
 function newQuestion() {
-    console.log(questions);
 // loop over question choices 
 // get current question from array and put it in header
-for (let i = 0; i < questions.length; i++) {
-    document.getElementById("question-header").textContent = questions.heading
+        for (let i = 0; i < questions.length; i++) {
+            document.getElementById("question-header").textContent = questions[i].heading
+            document.getElementById("question-1").textContent = questions[i].answers[0]
+            document.getElementById("question-2").textContent = questions[i].answers[1]
+            document.getElementById("question-3").textContent = questions[i].answers[2]
+            document.getElementById("question-4").textContent = questions[i].answers[3]
+            userChoice.addEventListener("click", function isAnswer() {
+                console.log("button clicked");
+            // if(isAnswerSelected === true)
+        
+            
     
+    // here we correctly access the html element and push whats in our array to the DOM. 
+    // Now we need to make sure our for loop does this one by one and only going to the 
+    // next question if the user presses a multiple choice.
     
-    console.log(questions);
-    
+
+          })  // if the users clicked button is not the answer stored in the object then wrong 
+   
 }
+
 
 // create a new button for every question
 // append choice text to button
 // append choice button to div-id=answers
-// clear out old quesiton choices 9reset inner html)
+// clear out old quesiton choices reset inner html)
 }    
     
 

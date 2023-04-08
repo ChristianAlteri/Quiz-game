@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz</title>
+    <link rel="stylesheet" href="./assets/css/style.css" />
+    <link rel="stylesheet" href="./assets/css/helper.css" />
+</head>
+<body>
+
+    <!-- Timer -->
+    <section class="hide font" id="clock" >Time: <h3 id="timer"></h3>
+    </section>
+
+    <!-- Start game button -->
+    <section id="start-game" class="hide font">
+        <h1>Welcome to my coding quiz</h1>
+        <button class="font" id="start-btn">Click here to Start</button>
+    </section>
+
+    <!-- Question section -->
+    <section id="questions" class="hide font">
+        <h2 class="font" id="question-header">Questions?</h2>
+        <ul id="multiple-choices" class="btn-group font">
+           
+        </ul>    
+
+    <!-- Feedback -->
+    <section class="text-center font hide" >
+        <h3 id="answer-feedback" class="hide-2 font">Feedback here</h3>
+    </section>
+        
+    <!-- End game screen -->
+    <section id="endgame" class="hide font">
+        <h1>Game Over</h1>
+        <h1>Your score is <span id=results></span></h1>
+        
+        <!-- Form to enter initials -->
+        <form>
+            <input type="text" placeholder="Initials here" id="input-initials font">
+
+            <!-- button to save initials -->
+            <button type="submit" id="save" class="font">Save</button>
+        </form>
+    </section>
+    
+    
+    <!-- All the high scores -->
+    <section class="hide" id="high-score">
+        
+        <button id="clear-score-btn"> Clear Highscores </button>
+    
+        <h3>Highscores</h3>
+    
+    
+    </section>
+
+    <script src="./assets/js/questions.js"></script>
+    <script src="./assets/js/indexV2.js"></script>
+</body>
+</html>
