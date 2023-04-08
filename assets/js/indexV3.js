@@ -8,7 +8,9 @@ let userScore = 0
 
 
 // what question are we on currently 
-let currentQuestion = 0;
+let currentQuestion;
+let currentQuestionIndex = 0;
+
 
 // varaibles to ref dom els (questions div, startBtn, answers div and so on)
 let timer = document.querySelector('#clock')
@@ -24,10 +26,10 @@ let questionChoicesEl = document.querySelector(".btn-group")
 
 function startGame(){
 //    show the start page the once usr clicks start button, swap the pages out
-    document.getElementById("start-game").className = ("show")
+    document.getElementById("start-game").className = ("show", "font")
     startButtonElement.addEventListener("click", function displayElement () {
         document.getElementById("start-game").className = ("hide")
-        document.getElementById("questions").className = ("show")
+        document.getElementById("questions").className = ("show", "font")
         timerFunc();
         document.getElementById("clock").className = ("show")
     
@@ -39,7 +41,7 @@ function startGame(){
     // check that we dsiplay the array correctly
     console.log(questions);
     // hide main starting page
-    document.querySelector('.initial-hide').style.display = "none";
+    // document.querySelector('.initial-hide').style.display = "none";
 });
 }
 
@@ -61,12 +63,11 @@ function timerFunc() {
 
 function renderQuestion(index) {
     questionChoicesEl.innerHTML = "";
-    for (let index = 0; index < questions.length; index++) {
-        let currentQuestion = questions[index];
-    }
-    console.log(currenQuestion);
+    currentQuestion = questions[currentQuestionIndex];
+    
+    console.log(currentQuestion);
     document.getElementById("question-header").textContent = currentQuestion.heading
-    for (let i = 0; i < currentQuestion.choices.length; i++){
+    for (let i = 0; i < currentQuestion.length; i++){
         // dynamically inject <li> and <button> into html
         const li = document.createElement('li');
         const button = document.createElement('button');
