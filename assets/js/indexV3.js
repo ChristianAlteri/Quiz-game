@@ -65,18 +65,19 @@ function renderQuestion(index) {
     questionChoicesEl.innerHTML = "";
     currentQuestion = questions[currentQuestionIndex];
     
-    console.log(currentQuestion);
+    // console.log(currentQuestion);
     document.getElementById("question-header").textContent = currentQuestion.heading
-    for (let i = 0; i < currentQuestion.length; i++){
-        // dynamically inject <li> and <button> into html
-        const li = document.createElement('li');
-        const button = document.createElement('button');
-        // inject classes into the elements
-        li.classList.add('show-main-page')
-        button.classList.add('show-main-page', 'btn')
-        button.addEventListener('click', function() {
-            checkUserAnswer()
-        })
+        for (let i = 0; i < currentQuestionIndex; i++){
+            console.log(currentQuestion);
+            // dynamically inject <li> and <button> into html
+            const li = document.createElement('li');
+            const button = document.createElement('button');
+            // inject classes into the elements
+            li.classList.add('show-main-page')
+            button.classList.add('show-main-page', 'btn')
+            button.addEventListener('click', function() {
+                checkUserAnswer()
+            })
     }
 }
 
