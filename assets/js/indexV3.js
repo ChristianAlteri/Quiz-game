@@ -77,22 +77,28 @@ function renderQuestion(index) {
             li.append(button)
             multipleCh.append(li)
             // write the answer choices
-            button.textContent = currentQuestion.quizQuestions.toString();
+            button.textContent = currentQuestion.quizQuestions[i];
             // inject classes into the elements to display
             li.classList.add('show-main-page')
             button.classList.add('show-main-page', 'btn')
             button.addEventListener('click', function() {
                 console.log(button);
-                let choice = button
+                
                 checkUserAnswer()
             })
     }
 }
 
-function checkUserAnswer() {
+function checkUserAnswer(button) {
+        console.log(button);
+        // let choice = document.button.value
+        let choice = document.querySelector('show-main-page').textContent
+        console.log(choice);
         // if the answer is correct, give 10 score & feedback
         if (choice === questions.answer) {
-            userScoreEl.textContent = userScore + 10;
+            console.log(choice);
+            console.log(answer);
+            userScoreEl.textContent = (userScore + 10);
             answerFeedback.textContent = 'Correct!'
         // Else remove 10 seconds of time & give feedback               
         } else {
