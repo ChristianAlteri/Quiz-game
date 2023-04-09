@@ -10,6 +10,7 @@ let userScore = 0
 // what question are we on currently 
 let currentQuestion;
 let currentQuestionIndex = 0;
+let multipleCh = document.querySelector("#multiple-choices")
 
 
 // varaibles to ref dom els (questions div, startBtn, answers div and so on)
@@ -39,7 +40,7 @@ function startGame(){
     
    
     // check that we dsiplay the array correctly
-    console.log(questions);
+    // console.log(questions);
     // hide main starting page
     // document.querySelector('.initial-hide').style.display = "none";
 });
@@ -64,18 +65,25 @@ function timerFunc() {
 function renderQuestion(index) {
     questionChoicesEl.innerHTML = "";
     currentQuestion = questions[currentQuestionIndex];
-    
+    // const li = document.createElement('li');
+    // const button = document.createElement('button');
     // console.log(currentQuestion);
     document.getElementById("question-header").textContent = currentQuestion.heading
-        for (let i = 0; i < currentQuestionIndex; i++){
-            console.log(currentQuestion);
-            // dynamically inject <li> and <button> into html
+        for (let i = 0; i < 4; i++){
+            console.log(i);
+            // dynamically create and append <li> and <button> into html
             const li = document.createElement('li');
             const button = document.createElement('button');
-            // inject classes into the elements
+            li.append(button)
+            multipleCh.append(li)
+            // write the answer choices
+            button.textContent = currentQuestion.quizQuestions.toString();
+            // inject classes into the elements to display
             li.classList.add('show-main-page')
             button.classList.add('show-main-page', 'btn')
             button.addEventListener('click', function() {
+                console.log(button);
+                let choice = button
                 checkUserAnswer()
             })
     }
