@@ -8,6 +8,8 @@ let userScore = 0
 
 
 // what question are we on currently 
+// let choiceButton = 
+// let button = button
 let currentQuestion;
 let currentQuestionIndex = 0;
 let multipleCh = document.querySelector("#multiple-choices")
@@ -22,6 +24,7 @@ let userChoice = document.querySelector("#question-1")
 let answerFeedback = document.getElementById("answer-feedback")
 let userScoreEl = document.getElementById("user-score")
 let questionChoicesEl = document.querySelector(".btn-group")
+
 
 
 
@@ -98,6 +101,10 @@ function checkUserAnswer(button) {
         if (choice === questions.answer) {
             console.log(choice);
             console.log(answer);
+            // create and show feedback 
+            const h3 = document.createElement('h3');
+            h3.append(answerFeedback)
+            h3.classList.add('show-main-page')
             userScoreEl.textContent = (userScore + 10);
             answerFeedback.textContent = 'Correct!'
         // Else remove 10 seconds of time & give feedback               
@@ -112,6 +119,8 @@ function checkUserAnswer(button) {
             renderQuestion(nextQuestionIndex)
         }
 
+
+// create and show highscores. store them to local storage
 
 
 
