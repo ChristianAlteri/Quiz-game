@@ -15,6 +15,10 @@ html body {
     display: flex;
 }
 
+/* .feedback {
+    font-size: x-large;
+} */
+
 .initial-hide {
     display: flex
 }

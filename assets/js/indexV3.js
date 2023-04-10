@@ -2,19 +2,19 @@
 // variables to keep track of data we care about across the entire quiz (otheriwse known as state)
 // let highScore = 
 // what is the time remaing
-let time = questions.length * 100;; 
-let userScore = 0
 // let timerId;
 
 
 // what question are we on currently 
 // let choiceButton = 
 // let button = button
+let userScore = 0
+let time = questions.length * 100;; 
+let highScore = 0
 let currentQuestion;
 let currentQuestionIndex = 0;
 let multipleCh = document.querySelector("#multiple-choices")
-
-
+let feedbackWindow = document.querySelector("#answer-feedback")
 // varaibles to ref dom els (questions div, startBtn, answers div and so on)
 let timer = document.querySelector('#clock')
 let questionsElement = document.querySelector('#questions')
@@ -24,19 +24,25 @@ let userChoice = document.querySelector("#question-1")
 let answerFeedback = document.getElementById("answer-feedback")
 let userScoreEl = document.getElementById("user-score")
 let questionChoicesEl = document.querySelector(".btn-group")
+let userName = document.querySelector("#name")
+// let userScore = document.querySelector("#scores")
 
 
 
 
 function startGame(){
+        
 //    show the start page the once usr clicks start button, swap the pages out
-    document.getElementById("start-game").className = ("show", "font")
-    startButtonElement.addEventListener("click", function displayElement () {
-        document.getElementById("start-game").className = ("hide")
-        document.getElementById("questions").className = ("show", "font")
-        timerFunc();
-        document.getElementById("clock").className = ("show")
-    
+        document.getElementById("start-game").className = ("show", "font")
+        startButtonElement.addEventListener("click", function displayElement () {
+            document.getElementById("start-game").className = ("hide")
+            document.getElementById("questions").className = ("show", "font")
+            timerFunc();
+            document.getElementById("clock").className = ("show")
+            
+        // initalise scores in local storage
+            // setScores();
+        
     // call new question function
     renderQuestion();
     // bring the questions to the front by changing its hidden state to display
@@ -84,10 +90,10 @@ function renderQuestion(index) {
             // inject classes into the elements to display
             li.classList.add('show-main-page')
             button.classList.add('show-main-page', 'btn')
-            button.addEventListener('click', function() {
+            button.addEventListener('click', function(event) {
                 console.log(button);
                 
-                checkUserAnswer()
+                checkUserAnswer(event.target)
             })
     }
 }
@@ -95,80 +101,68 @@ function renderQuestion(index) {
 function checkUserAnswer(button) {
         console.log(button);
         // let choice = document.button.value
-        let choice = document.querySelector('show-main-page').textContent
+        let choice = button.textContent
         console.log(choice);
+        console.log(currentQuestion.answer[currentQuestionIndex]);
         // if the answer is correct, give 10 score & feedback
-        if (choice === questions.answer) {
-            console.log(choice);
-            console.log(answer);
+        if (choice === currentQuestion.answer[currentQuestionIndex]) {
             // create and show feedback 
+
+            createFeedbackResponses();
+
             const h3 = document.createElement('h3');
-            h3.append(answerFeedback)
-            h3.classList.add('show-main-page')
-            userScoreEl.textContent = (userScore + 10);
+            feedbackWindow.append(h3)
+            feedbackWindow.classList.add('show')
+            answerFeedback.classList.add('show')
+            userScoreEl.classList.add('show')
+            // update score and store it locally
+
+
+
+            currentUserScore = (userScore + 10)
+            userScoreEl.textContent = (currentUserScore);
+            localStorage.setItem("currentUserScore", currentUserScore)
             answerFeedback.textContent = 'Correct!'
+            // nextQuestion()
         // Else remove 10 seconds of time & give feedback               
         } else {
-            timer = time - 10;             
-            answerFeedback.textContent = 'Incorrect.'
+            timer = time - 10;      
+            answerFeedback.classList.add('show')       
+            answerFeedback.textContent = 'Incorrect :('
         }
-        const nextQuestionIndex = index + 1;
+        const nextQuestionIndex = currentQuestionIndex + 1;
         if (nextQuestionIndex >= questions.length){
-            endGame()
+            updateScores()
         } else{
             renderQuestion(nextQuestionIndex)
         }
 
 
-// create and show highscores. store them to local storage
-
-
-
-// function renderQuestion() {
-//     for (let i = 0; i < 
-//         const choice = questions[i];
-//         // dynamically inject <li> and <button> into html
-//         const li = document.createElement('li');
-//         const button = document.createElement('button');
-//         // inject classes into the elements
-//         li.classList.add('show-main-page')
-//         button.classList.add('show-main-page', 'btn')
-//         // ask 1st questions
-//         document.getElementById("question-header").textContent = questions[i].heading;
+// ask user to save their score to the local storage 
+function updateScores(){
+    // swap pages out
     
-//         button.textContent = questions[i].quizQuestions[i]       
-//         // When an answer button is clicked
-//         button.addEventListener('click', function(){
-//             // if the answer is correct, give 10 score & feedback
-//             if (choice) {
-//                 userScoreEl.textContent = userScore + 10;
-//                 answerFeedback.textContent = 'Correct!'
-//             // Else remove 10 seconds of time & give feedback               
-//             } else {
-//                 timer = time - 10;             
-//                 answerFeedback.textContent = 'Incorrect.'
-//             }
+    document.getElementById("userScore").className = ("show", "font")
+// set input to local storage in an object called scores with a key of name: value of userScore: 
+    userName.localStorage.setItem('name', );
+    userScore.localStorage.setItem('userScore', );
+    displayHighscores();
+};
 
-//             // Move on to next question
-//             const nextQuestionIndex = choice +1;
+function displayHighscores(){
+    // swap pages
+    document.getElementById("endgame").className = ("hide")
+    document.getElementById("high-score").className = ("show", "font")
+    console.log(userScore);
+    if (userScore > highScore) {
+        highScore = userScore;
+      }
+    document.getElementById("high-score").textContent = JSON.parse(scores.userScore)  
+};
 
-//             // If it's the last question, end the game with a 500ms delay so user can see their feedback first
-//             if (nextQuestionIndex >= questions.length) {
-//                 setTimeout(() => {return loserMessage()}, 600);
-//             } else {
-//             // else render the next question 
-//                 setTimeout(() => {renderQuestion(nextQuestionIndex);}, 600);
-//             }
-//         });
-
-//         // Button becomes a child of  the list
-//         li.appendChild(button); 
-
-//         // List is appended to the correct section
-//         questionChoicesEl.append(li);   
-// }
-// }
-
+function setScores(){
+    
+}
 
 // end Game 
 function endGame() {
