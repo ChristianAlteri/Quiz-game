@@ -8,14 +8,20 @@
 // what question are we on currently 
 // let choiceButton = 
 // let button = button
-let userScore = 0
-let time = questions.length * 100;; 
-let highScore = 0
+let time = questions.length * 100;
+let userScore = 0;
+// let timeRemaining = time;
+let scoreList = [100, 200 ,300, 5, 6, 7];
+let highScore;
+// let topFive = scoreList.slice(0, 3);
 let currentQuestion;
 let currentQuestionIndex = 0;
+
+
+
+
 let multipleCh = document.querySelector("#multiple-choices")
 let feedbackWindow = document.querySelector("#answer-feedback")
-// varaibles to ref dom els (questions div, startBtn, answers div and so on)
 let timer = document.querySelector('#clock')
 let questionsElement = document.querySelector('#questions')
 let questionsTitle = document.querySelector('#question-header')
@@ -29,8 +35,8 @@ let userName = document.querySelector("#name")
 
 
 
-
 function startGame(){
+        
         
 //    show the start page the once usr clicks start button, swap the pages out
         document.getElementById("start-game").className = ("show", "font")
@@ -44,16 +50,18 @@ function startGame(){
             // setScores();
         
     // call new question function
-    renderQuestion();
+            renderQuestion();
     // bring the questions to the front by changing its hidden state to display
     
    
-    // check that we dsiplay the array correctly
-    // console.log(questions);
-    // hide main starting page
-    // document.querySelector('.initial-hide').style.display = "none";
+   
+        // endGame ();
 });
 }
+
+// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!//
+// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!//
+
 
 // create a timer
 function timerFunc() {
@@ -79,7 +87,7 @@ function renderQuestion(index) {
     // console.log(currentQuestion);
     document.getElementById("question-header").textContent = currentQuestion.heading
         for (let i = 0; i < 4; i++){
-            console.log(i);
+            
             // dynamically create and append <li> and <button> into html
             const li = document.createElement('li');
             const button = document.createElement('button');
@@ -91,7 +99,7 @@ function renderQuestion(index) {
             li.classList.add('show-main-page')
             button.classList.add('show-main-page', 'btn')
             button.addEventListener('click', function(event) {
-                console.log(button);
+                 
                 
                 checkUserAnswer(event.target)
             })
@@ -99,8 +107,9 @@ function renderQuestion(index) {
 }
 
 function checkUserAnswer(button) {
-        console.log(button);
+        
         // let choice = document.button.value
+        
         let choice = button.textContent
         console.log(choice);
         console.log(currentQuestion.answer[currentQuestionIndex]);
@@ -108,40 +117,51 @@ function checkUserAnswer(button) {
         if (choice === currentQuestion.answer[currentQuestionIndex]) {
             // create and show feedback 
 
-            createFeedbackResponses();
-
             const h3 = document.createElement('h3');
             feedbackWindow.append(h3)
             feedbackWindow.classList.add('show')
             answerFeedback.classList.add('show')
             userScoreEl.classList.add('show')
-            // update score and store it locally
-
-
-
             currentUserScore = (userScore + 10)
             userScoreEl.textContent = (currentUserScore);
-            localStorage.setItem("currentUserScore", currentUserScore)
+            localStorage.setItem("currentUserScore", currentUserScore);
+            // push current score into sorted array and store in local storage
+            scoreList.push(currentUserScore);
+            scoreList.sort((a, b) => b - a)
+            localStorage.setItem("scoreList", JSON.stringify(scoreList));
             answerFeedback.textContent = 'Correct!'
+            // creates a top five array
+            topFive();
+            // creates a highscore based on topfive array
+            let highScore = scoreList[0];
+            localStorage.setItem("highscore", JSON.stringify(highScore));
+            currentQuestionIndex++
+            console.log(currentQuestionIndex);
             // nextQuestion()
+            nextQuestion();
         // Else remove 10 seconds of time & give feedback               
         } else {
-            timer = time - 10;      
+            timerId = setInterval(function () {
+                timer.textContent = "Time: " + (time - 10); 
+                })    
             answerFeedback.classList.add('show')       
             answerFeedback.textContent = 'Incorrect :('
+            currentQuestionIndex++
+            nextQuestion();
         }
-        const nextQuestionIndex = currentQuestionIndex + 1;
-        if (nextQuestionIndex >= questions.length){
-            updateScores()
-        } else{
-            renderQuestion(nextQuestionIndex)
-        }
+        
+        // const nextQuestionIndex = currentQuestionIndex + 1;
+        // if (nextQuestionIndex >= questions.length){
+        //     updateScores()
+        // } else{
+        //     renderQuestion(nextQuestionIndex)
+        // }
 
 
 // ask user to save their score to the local storage 
 function updateScores(){
     // swap pages out
-    
+ 
     document.getElementById("userScore").className = ("show", "font")
 // set input to local storage in an object called scores with a key of name: value of userScore: 
     userName.localStorage.setItem('name', );
@@ -149,30 +169,73 @@ function updateScores(){
     displayHighscores();
 };
 
-function displayHighscores(){
-    // swap pages
-    document.getElementById("endgame").className = ("hide")
-    document.getElementById("high-score").className = ("show", "font")
-    console.log(userScore);
-    if (userScore > highScore) {
-        highScore = userScore;
-      }
-    document.getElementById("high-score").textContent = JSON.parse(scores.userScore)  
+
+function topFive(){
+    if (currentUserScore > scoreList[4]){
+      scoreList.push(currentUserScore);
+      scoreList.sort((a, b) => b - a);
+      scoreList.splice(5);
+      localStorage.setItem("topFive", JSON.stringify(scoreList));
+      
+    }
+  }
+
+function nextQuestion(){
+    if(currentQuestionIndex !== questions.length){
+        renderQuestion(currentQuestionIndex);
+    }else{
+        displayForm();
+    }
+
+
+}
+
+    
+function displayForm() {
+    console.log("Ya feeel me");
+    displayHighScores();
+}
+
+function displayHighScores(){
+    // swap pages and grab data from local storage and parse to html elements
+
+
 };
 
-function setScores(){
-    
-}
 
 // end Game 
-function endGame() {
-    alert("Times UP!!")
-    //     // show end screen
-    //     // hide quesitons screen
-    //     // show final scrore
-    //   }
+function endGame () {
+    console.log("game ended");
+    // startGame();
+
+    // clearInterval(timerId);
+    // // sectionEndGame.classList.remove('hide');
+    // questionChoicesEl.classList.add('hide');
+    // timer.classList.add('hide');
+    // getElementById("start-game").classList.add('hide');
+    // // finalScoreEl.textContent = userScore;
+    // answerFeedback.classList.add('hide');
+    // // homeButton.classList.remove('hide');
 }
 }
+
+
+
+
+
+
+
+
+
+
+function resetGameScores() {
+    let userScore = 0
+    let localScores = JSON.parse(localStorage.getItem("highscore"));
+    if (localScores !== null) {
+        scoreList = localScores;
+    }
+}
+
 
 startGame()
 
