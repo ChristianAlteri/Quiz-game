@@ -1,6 +1,6 @@
 var questions = [
     {
-        heading: "What is it?",
+        heading: "q1",
         quizQuestions: ["a", "b", "c", "d"],
         answer: "a",
     },
@@ -12,7 +12,7 @@ var questions = [
     {
         heading: "q3",
         quizQuestions: ["a", "s", "d", "f"],
-        answer: "a",
+        answer: "d",
     },
     {
         heading: "q4",

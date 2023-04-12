@@ -28,7 +28,7 @@
         </ul>    
 
     <!-- Feedback -->
-    <section class="text-center font" >
+    <section id="feedback" class="text-center font" >
         <h3 id="feedback" class="font">  </h3>
         <section id="answer-feedback" class="feedback font hide">Your answer was </section>
         <h4 id="user-score" class="score font hide">Your current score is </h4>
@@ -40,11 +40,12 @@
         <h1>Your score is <span id=results></span></h1>
         
         <!-- Form to enter initials -->
-        <form>
-            <input type="text" placeholder="Initials here" id="input-initials font">
+        <form id="formEl" class="hide">
+            <label for="formName">Initials: </label>
+            <input type="text" id="formName" class="font" placeholder="Initials here" >
 
             <!-- button to save initials -->
-            <button type="submit" id="save" class="font">Save</button>
+            <button type="submit" id="saveBtn" class="font">Save</button>
         </form>
     </section>
     
