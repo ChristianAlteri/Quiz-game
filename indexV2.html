@@ -27,22 +27,24 @@
            
         </ul>    
 
-    <!-- Feedback -->
+            <!-- Feedback -->
     <section id="feedback" class="text-center font" >
         <h3 id="feedback" class="font">  </h3>
         <section id="answer-feedback" class="feedback font hide">Your answer was </section>
         <h4 id="user-score" class="score font hide">Your current score is </h4>
     </section>
-        
+
+
+    </section>    
     <!-- End game screen -->
     <section id="endgame" class="hide font">
         <h1>Game Over</h1>
-        <h1>Your score is <span id=results></span></h1>
+        <h1>Your score is <span id="results"></span></h1>
         
         <!-- Form to enter initials -->
         <form id="formEl" class="hide">
-            <label for="formName">Initials: </label>
-            <input type="text" id="formName" class="font" placeholder="Initials here" >
+            <label id="form-label" for="fName">Initials: </label>
+            <input type="text" name="form-name" id="formName" class="font" placeholder="Initials here" >
 
             <!-- button to save initials -->
             <button type="submit" id="saveBtn" class="font">Save</button>

@@ -22,6 +22,8 @@ let formEl = document.querySelector("#formEl");
 let startGamePage = document.getElementById("start-game");
 let feedbackSection = document.getElementById("feedback");
 let endGameEl = document.getElementById("endgame");
+let resultsEl = document.getElementById("results");
+let formLabel = document.getElementById("form-label")
 
 function startGame() {
   //    show the start page the once usr clicks start button, swap the pages out
@@ -155,24 +157,31 @@ function checkUserAnswer(button) {
     feedbackSection.className = "hide";
     // load form in
 
-    endGameEl.className = "show";
+    endGameEl.className = ("show", "font");
+    formEl.className = ("show", "font");
+    resultsEl.textContent = userScore;
+    // endGameEl.style.display = "flex"
+
     // endGameEl.append(formEl);
 
-    // formEl.addEventListener('submit', function(event) {
-    // event.preventDefault(); // Prevent the form from submitting and reloading the page
-
-    // const formData = new FormData(form);
-    // const userInitials = formData.get(Text);
-
-    // // Store the data in localStorage
-    // localStorage.setItem('userInitials', formData);
-    // localStorage.setItem('email', email);
-    // });
-
-    console.log("Ya feeel me");
+    formEl.addEventListener('submit', function(event) {
+    event.preventDefault(); // Prevent the form from submitting and reloading the page
+    validateForm()
+    // Store the data in localStorage
+    
+    });
     displayHighScores();
-  }
+  };
 
+  function validateForm() {
+    let x = document.forms.getElementsByName("form-name").value;
+    if (x == "") {
+        formLabel.textContent = "Name must be filled out";
+      return false;
+    }else {
+        localStorage.setItem('userInitials', (userInitials + userScore));
+    }
+  }
   function displayHighScores() {
     // swap pages and grab data from local storage and parse to html elements
   }
