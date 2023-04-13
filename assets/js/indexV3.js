@@ -90,7 +90,7 @@ function checkUserAnswer(button) {
   let choice = button.textContent;
 
   if (choice === currentQuestion.answer) {
-    // debugger
+
     const h3 = document.createElement("h3");
     feedbackWindow.append(h3);
     feedbackWindow.classList.add("show");
@@ -109,14 +109,11 @@ function checkUserAnswer(button) {
     // Creates a top five array and a high score
     topFive();
 
-    let highScore = topFive[0]
-    localStorage.setItem("highScore", JSON.stringify(highScore));
-
-
-
-    saveScore ();
+    let highScore = scoreList[0]
+    localStorage.setItem("high-Score", JSON.stringify(highScore));
     
 
+    
     nextQuestion();
     // Else remove 10 seconds of time & give feedback
   } else {
@@ -135,6 +132,7 @@ function checkUserAnswer(button) {
     });
       scoreList.splice(5);
       localStorage.setItem("topFive", JSON.stringify(scoreList));
+    //   return scoreList;
     }
   }
 
@@ -186,34 +184,13 @@ function checkUserAnswer(button) {
   }
 }
 
-function saveScore () {
-    localStorage.setItem("highscore", JSON.stringify(highScore));
-}
 
 function displayHighScores() {
   endGameEl.className = "hide";
   formEl.className = "hide";
+createTable()
 
-  let table = document.createElement('table');
-  let headerRow = document.createElement('tr');
-  // Array with header names
-  let headers = ['Name', 'Score'];
-  headers.forEach (headerText => {
-    let header = document.createElement('th');
-    let textNode = document.createTextNode(headerText);
-    header.appendChild(textNode);
-    headerRow.appendChild(header)
-    table.appendChild(headerRow);
-    headerRow.appendChild(hsTable)
-});
-
-
-//   hsTable.className = "show";
-//   localStorage.getItem(userInitials)
-//   document.getElementById("row-1").textContent = (userInitials)
-
-
-  clearScoreBtn.addEventListener("click", function deleteItems() {
+clearScoreBtn.addEventListener("click", function deleteItems() {
     localStorage.clear();
     hsTable.className = "hide";
   });
@@ -222,6 +199,30 @@ function displayHighScores() {
     endGame();
   });
 }
+
+
+function createTable(){
+    let table = document.createElement('table');
+    let headerRow = document.createElement('tr');
+    // Array with header names
+    let headers = ['Name', 'Score'];
+        headers.forEach (headerText => {
+        let header = document.createElement('th');
+        let textNode = document.createTextNode(headerText);
+        header.appendChild(textNode);
+        headerRow.appendChild(header)
+        table.appendChild(headerRow);
+        headerRow.appendChild(hsTable)
+
+})
+};
+
+//   hsTable.className = "show";
+//   localStorage.getItem(userInitials)
+//   document.getElementById("row-1").textContent = (userInitials)
+
+
+  
 
 function endGame() {
   hsTable.className = "hide";
