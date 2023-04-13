@@ -4,6 +4,7 @@ let scoreList = [100, 200, 300, 5, 6, 7];
 let highScore;
 let currentQuestion;
 let currentQuestionIndex = 0;
+let playerList = ["jo", "micheal"];
 
 let multipleCh = document.querySelector("#multiple-choices");
 let feedbackWindow = document.querySelector("#answer-feedback");
@@ -23,7 +24,11 @@ let startGamePage = document.getElementById("start-game");
 let feedbackSection = document.getElementById("feedback");
 let endGameEl = document.getElementById("endgame");
 let resultsEl = document.getElementById("results");
-let formLabel = document.getElementById("form-label")
+let formLabel = document.getElementById("form-label");
+let inputFormEL = document.getElementById("high-score");
+let endButton = document.getElementById("end-button");
+let clearScoreBtn = document.getElementById("clear-score-btn");
+let hsTable = document.getElementById("high-score-table");
 
 function startGame() {
   //    show the start page the once usr clicks start button, swap the pages out
@@ -41,7 +46,6 @@ function startGame() {
   });
 }
 
-// create a timer
 function timerFunc() {
   timerId = setInterval(function () {
     // count down in seconds, time
@@ -85,10 +89,6 @@ function renderQuestion() {
 function checkUserAnswer(button) {
   let choice = button.textContent;
 
-  console.log("currentQuestion.answer", currentQuestion.answer);
-  console.log("currentQuestionIndex", currentQuestionIndex);
-  console.log("currentQuestion.answer", currentQuestion.answer);
-
   if (choice === currentQuestion.answer) {
     // debugger
     const h3 = document.createElement("h3");
@@ -121,16 +121,6 @@ function checkUserAnswer(button) {
     nextQuestion();
   }
 
-  // // ask user to save their score to the local storage
-  // function updateScores(){
-  //     // swap pages out
-  //     document.getElementById("userScore").className = ("show", "font")
-  // // set input to local storage in an object called scores with a key of name: value of userScore:
-  //     userName.localStorage.setItem('name', );
-  //     userScore.localStorage.setItem('userScore', );
-  //     displayHighscores();
-  // };
-
   function topFive() {
     if (userScore > scoreList[4]) {
       scoreList.push(userScore);
@@ -150,7 +140,6 @@ function checkUserAnswer(button) {
   }
 
   function displayForm() {
-    // debugger
     // clear time, feedback and question section
     timer.className = "hide";
     questionsElement.className = "hide";
@@ -164,50 +153,56 @@ function checkUserAnswer(button) {
 
     // endGameEl.append(formEl);
 
-    formEl.addEventListener('submit', function(event) {
-    event.preventDefault(); // Prevent the form from submitting and reloading the page
-    validateForm()
-    // Store the data in localStorage
-    
+    formEl.addEventListener("submit", function (event) {
+      event.preventDefault(); // Prevent the form from submitting and reloading the page
+      validateForm();
+      displayHighScores();
+      // Store the data in localStorage
     });
-    displayHighScores();
-  };
+  }
 
   function validateForm() {
-    let x = document.forms.getElementsByName("form-name").value;
-    if (x == "") {
-        formLabel.textContent = "Name must be filled out";
+    let userInitials = document.getElementById("formName");
+    console.log(userInitials.value);
+    if (userInitials === "") {
+      formLabel.textContent = "Name must be filled out";
       return false;
-    }else {
-        localStorage.setItem('userInitials', (userInitials + userScore));
+    } else {
+      localStorage.setItem(
+        "userInitials",
+        JSON.stringify(userInitials.value + " - " + userScore)
+      );
+      playerList.push(userInitials.value);
+      //   playerList.setItem("playerList", JSON.stringify(playerList.value));
     }
-  }
-  function displayHighScores() {
-    // swap pages and grab data from local storage and parse to html elements
-  }
-
-  // end Game
-  function endGame() {
-    console.log("game ended");
-    // startGame();
-
-    // clearInterval(timerId);
-    // // sectionEndGame.classList.remove('hide');
-    // questionChoicesEl.classList.add('hide');
-    // timer.classList.add('hide');
-    // getElementById("start-game").classList.add('hide');
-    // // finalScoreEl.textContent = userScore;
-    // answerFeedback.classList.add('hide');
-    // // homeButton.classList.remove('hide');
   }
 }
 
-function resetGameScores() {
-  let userScore = 0;
-  let localScores = JSON.parse(localStorage.getItem("highscore"));
-  if (localScores !== null) {
-    scoreList = localScores;
-  }
+function displayHighScores(userInitials) {
+  endGameEl.className = "hide";
+  formEl.className = "hide";
+
+  hsTable.className = "show";
+  localStorage.getItem(userInitials)
+  document.getElementById("row-1").textContent = (userInitials)
+
+
+  clearScoreBtn.addEventListener("click", function deleteItems() {
+    localStorage.clear();
+    hsTable.className = "hide";
+  });
+
+  endButton.addEventListener("click", function () {
+    endGame();
+  });
+}
+
+function endGame() {
+  hsTable.className = "hide";
+  //   hsTable.className = "show";
+  startGame();
+
+  console.log("game ended");
 }
 
 startGame();
