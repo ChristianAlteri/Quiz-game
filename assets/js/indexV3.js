@@ -108,8 +108,14 @@ function checkUserAnswer(button) {
 
     // Creates a top five array and a high score
     topFive();
-    let highScore = scoreList[0];
-    localStorage.setItem("highscore", JSON.stringify(highScore));
+
+    let highScore = topFive[0]
+    localStorage.setItem("highScore", JSON.stringify(highScore));
+
+
+
+    saveScore ();
+    
 
     nextQuestion();
     // Else remove 10 seconds of time & give feedback
@@ -124,7 +130,9 @@ function checkUserAnswer(button) {
   function topFive() {
     if (userScore > scoreList[4]) {
       scoreList.push(userScore);
-      scoreList.sort((a, b) => b - a);
+      scoreList.sort((a, b) => {
+        return b.score - a.score;
+    });
       scoreList.splice(5);
       localStorage.setItem("topFive", JSON.stringify(scoreList));
     }
@@ -178,13 +186,31 @@ function checkUserAnswer(button) {
   }
 }
 
-function displayHighScores(userInitials) {
+function saveScore () {
+    localStorage.setItem("highscore", JSON.stringify(highScore));
+}
+
+function displayHighScores() {
   endGameEl.className = "hide";
   formEl.className = "hide";
 
-  hsTable.className = "show";
-  localStorage.getItem(userInitials)
-  document.getElementById("row-1").textContent = (userInitials)
+  let table = document.createElement('table');
+  let headerRow = document.createElement('tr');
+  // Array with header names
+  let headers = ['Name', 'Score'];
+  headers.forEach (headerText => {
+    let header = document.createElement('th');
+    let textNode = document.createTextNode(headerText);
+    header.appendChild(textNode);
+    headerRow.appendChild(header)
+    table.appendChild(headerRow);
+    headerRow.appendChild(hsTable)
+});
+
+
+//   hsTable.className = "show";
+//   localStorage.getItem(userInitials)
+//   document.getElementById("row-1").textContent = (userInitials)
 
 
   clearScoreBtn.addEventListener("click", function deleteItems() {
