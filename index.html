@@ -13,9 +13,9 @@
     
 
     <!-- Start game button -->
-    <section id="start-game" class="hide font start-game ">
-        <h1 class="center font full-screen absolute" >Coding Quiz Challenge</h1>
-        <h3 id="q-h3" class="center font full-screen relative" >Try to answer the following code-related questions within the time limit. Keep in mind that incorrect answers will be penalized by taking ten seconds off your time! Best of luck!</h3>
+    <section id="start-game" class="hide font start-game column">
+        <h1 class="center font column" >Coding Quiz Challenge</h1>
+        <h3 id="q-h3" class="center font column" >Try to answer the following code-related questions within the time limit. <br>Keep in mind that incorrect answers will be penalized by taking ten seconds off your time! Best of luck!</h3>
         <button class="font btn" id="start-btn">Click here to Start</button>
     </section>
 
@@ -24,7 +24,10 @@
         <h2 class="font" id="question-header">Questions?</h2>
         <ul id="multiple-choices" class="btn-group font">
            
-        </ul>    
+        </ul>   
+
+    <!-- Highscore button -->
+    <button class="hide" id="view-btn">View Highscores</button>
     <!-- Timer -->
     <section class="font" id="clock" > <h3 id="timer"></h3>
     </section>
@@ -76,6 +79,6 @@
     </section>
 
     <script src="./assets/js/questions.js"></script>
-    <script src="./assets/js/indexV3.js"></script>
+    <script src="./assets/js/indexV4.js"></script>
 </body>
 </html>

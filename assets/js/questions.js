@@ -10,13 +10,13 @@ var questions = [
         answer: "2. Curly brackets",
     },
     {
-        heading: "Arrays in JavaScript",
-        quizQuestions: ["a", "s", "d", "f"],
-        answer: "d",
+        heading: "Arrays in JavaScript can be used to store ___.",
+        quizQuestions: ["1. Numbers and strings", "2. Other arrays", "3. Booleans", "4. All of the above"],
+        answer: "4. All of the above",
     },
     {
-        heading: "q4",
-        quizQuestions: ["z", "x", "c", "v"],
-        answer: "v",
+        heading: "A very useful tool used during development and debugging for printing content to the debugger is:",
+        quizQuestions: ["1. JavaScript", "2. Terminal / bash", "3. For loops", "4. Console.log"],
+        answer: "4. Console.log",
     },
 ]
