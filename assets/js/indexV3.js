@@ -2,6 +2,7 @@ let time = questions.length * 100;
 let userScore = 0;
 let scoreList = [100, 200, 300, 5, 6, 7];
 let highScore;
+let userInitials;
 let currentQuestion;
 let currentQuestionIndex = 0;
 let playerList = ["jo", "micheal"];
@@ -31,13 +32,15 @@ let clearScoreBtn = document.getElementById("clear-score-btn");
 let hsTable = document.getElementById("high-score-table");
 
 function startGame() {
+  currentQuestionIndex = 0;
   //    show the start page the once usr clicks start button, swap the pages out
   startGamePage.className = ("show", "font");
   startButtonElement.addEventListener("click", function displayElement() {
     startGamePage.className = "hide";
     questionsElement.className = ("show", "font");
-    timerFunc();
+    
     document.getElementById("clock").className = "show";
+    timerFunc();
 
     // initalise scores in local storage
     // setScores();
@@ -56,7 +59,7 @@ function timerFunc() {
     // break loop if time is 0
     if (time === 0) {
       clearInterval(timerId);
-      loserMessage();
+      
     }
   }, 1000);
 }
@@ -174,11 +177,20 @@ function checkUserAnswer(button) {
       formLabel.textContent = "Name must be filled out";
       return false;
     } else {
-      localStorage.setItem(
-        "userInitials",
-        JSON.stringify(userInitials.value + " - " + userScore)
-      );
-      playerList.push(userInitials.value);
+        const user = {
+            name: userInitials.value,
+            highscore: userScore,
+        }
+
+        // push user into exisiting user initials in LS
+        const existingHighscores = JSON.parse(localStorage.getItem('userInitials')) || [];
+
+        existingHighscores.push(user);
+        // resave to LS
+        localStorage.setItem('userInitials', JSON.stringify(existingHighscores));
+
+    
+      // playerList.push(userInitials.value);
       //   playerList.setItem("playerList", JSON.stringify(playerList.value));
     }
   }
@@ -188,11 +200,15 @@ function checkUserAnswer(button) {
 function displayHighScores() {
   endGameEl.className = "hide";
   formEl.className = "hide";
-createTable()
+  hsTable.className = "show";
+    createTable()
 
+
+
+// clear and end return home button
 clearScoreBtn.addEventListener("click", function deleteItems() {
     localStorage.clear();
-    hsTable.className = "hide";
+    // hsTable.className = "hide";
   });
 
   endButton.addEventListener("click", function () {
@@ -202,19 +218,54 @@ clearScoreBtn.addEventListener("click", function deleteItems() {
 
 
 function createTable(){
-    let table = document.createElement('table');
-    let headerRow = document.createElement('tr');
-    // Array with header names
-    let headers = ['Name', 'Score'];
-        headers.forEach (headerText => {
-        let header = document.createElement('th');
-        let textNode = document.createTextNode(headerText);
-        header.appendChild(textNode);
-        headerRow.appendChild(header)
-        table.appendChild(headerRow);
-        headerRow.appendChild(hsTable)
+    // let table = document.createElement('table');
+    // let headerRow = document.createElement('tr');
+    const tbodyEl = hsTable.querySelector('tbody');
+    // make html table and populate with topFive. use for loop. 
+    // change top five to object with the same key value pair as line 179
+    // get the items from ls
+    const highscores = JSON.parse(localStorage.getItem('userInitials')) || [];
 
-})
+    tbodyEl.textContent = "";
+    // loop thru the items
+    highscores.forEach((highscore) => {
+      console.log(highscore);
+      // for each item, generate the trs
+      const tr = document.createElement('tr');
+
+      const tdName = document.createElement('td');
+      tdName.textContent = highscore.name;
+      const tdScore = document.createElement('td');
+      tdScore.textContent = highscore.highscore;
+
+      tr.append(tdName, tdScore)
+
+      tbodyEl.append(tr);
+
+    })
+   
+
+
+    // let headers = ['Name', 'Score'];
+    //     headers.forEach (headerText => {
+    //     let header = document.createElement('th');
+    //     let textNode = document.createTextNode(headerText);
+    //     header.appendChild(textNode);
+    //     headerRow.appendChild(header)
+    //     table.appendChild(headerRow);
+    //     hsTable.appendChild(headerRow)
+    //     headerRow.className = "font high-score-table";
+    //     header.className = "font high-score-table";
+    //     // header.textContent = (localStorage.getItem(userInitials));
+
+        // let userNameRow = document.createElement('th');
+        // userNameRow.textContent = userScore
+        // userNameRow.appendChild(header)
+        
+        
+
+
+
 };
 
 //   hsTable.className = "show";

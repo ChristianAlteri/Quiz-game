@@ -15,6 +15,11 @@ html body {
     display: flex;
 }
 
+.high-score-table{
+    padding: 20px;
+    font-size: large;
+}
+
 /* .feedback {
     font-size: x-large;
 } */
@@ -24,9 +29,9 @@ html body {
 }
 
 .btn{
-  background: #5E5DF0;
+  background: #f05ddc;
   border-radius: 999px;
-  box-shadow: #5E5DF0 0 10px 20px -10px;
+  box-shadow: #f05ddc 0 10px 20px -10px;
   box-sizing: border-box;
   color: #FFFFFF;
   cursor: pointer;
