@@ -10,13 +10,12 @@
 </head>
 <body>
 
-    <!-- Timer -->
-    <section class="hide font" id="clock" > <h3 id="timer"></h3>
-    </section>
+    
 
     <!-- Start game button -->
-    <section id="start-game" class="hide font">
-        <h1>Welcome to my coding quiz</h1>
+    <section id="start-game" class="hide font start-game ">
+        <h1 class="center font full-screen absolute" >Coding Quiz Challenge</h1>
+        <h3 id="q-h3" class="center font full-screen relative" >Try to answer the following code-related questions within the time limit. Keep in mind that incorrect answers will be penalized by taking ten seconds off your time! Best of luck!</h3>
         <button class="font btn" id="start-btn">Click here to Start</button>
     </section>
 
@@ -26,7 +25,9 @@
         <ul id="multiple-choices" class="btn-group font">
            
         </ul>    
-
+    <!-- Timer -->
+    <section class="font" id="clock" > <h3 id="timer"></h3>
+    </section>
             <!-- Feedback -->
     <section id="feedback" class="text-center font" >
         <h3 id="feedback" class="font">  </h3>
@@ -54,7 +55,7 @@
     
     <!-- All the high scores table -->
     <section class="hide" id="high-score-table">  
-            <table class="font">
+            <table id="table" class="font">
                 <thead>
                     <tr>
                         <th>Name</th>

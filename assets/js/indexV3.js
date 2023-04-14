@@ -30,16 +30,20 @@ let inputFormEL = document.getElementById("high-score");
 let endButton = document.getElementById("end-button");
 let clearScoreBtn = document.getElementById("clear-score-btn");
 let hsTable = document.getElementById("high-score-table");
+let table = document.getElementById("table")
 
 function startGame() {
   currentQuestionIndex = 0;
+  userScore = 0;
   //    show the start page the once usr clicks start button, swap the pages out
-  startGamePage.className = ("show", "font");
+  startGamePage.className = ("show");
   startButtonElement.addEventListener("click", function displayElement() {
     startGamePage.className = "hide";
-    questionsElement.className = ("show", "font");
+    timer.className = ("show-2")
+    questionsElement.className = ("show");
     
-    document.getElementById("clock").className = "show";
+    
+    
     timerFunc();
 
     // initalise scores in local storage
@@ -208,7 +212,7 @@ function displayHighScores() {
 // clear and end return home button
 clearScoreBtn.addEventListener("click", function deleteItems() {
     localStorage.clear();
-    // hsTable.className = "hide";
+    table.className = "hide";
   });
 
   endButton.addEventListener("click", function () {

@@ -1,3 +1,23 @@
 .font{
+  font-size: x-large;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
 };
+
+/* .center{
+  /* border: 5px solid; */
+  margin: 70px;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+} */
+
+.full-screen {
+    margin: 0;
+    height: 100%;
+    width: 100%;
+}
+
+.wrap {
+  flex-wrap: wrap;
+}
